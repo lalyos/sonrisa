@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  dinner:
+    image: web:v5
+    ports:
+    - 80
+    environment:
+     - TITLE=${TITLE:-Dinner time DEV}
+     - COLOR=${COLOR:-lightgreen}
+  db:
+    image: postgres
+    volumes:
+    - ./sql:/docker-entrypoint-initdb.d
+    - vipdb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-}
+
+volumes:
+  vipdb: 
